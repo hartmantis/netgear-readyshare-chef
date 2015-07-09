@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 #
 # Cookbook Name:: netgear-readyshare
-# Recipe:: default
+# Library:: matchers
 #
 # Copyright 2015 Jonathan Hartman
 #
@@ -18,6 +18,14 @@
 # limitations under the License.
 #
 
-netgear_readyshare_printer_app 'default' do
-  action :install
+if defined?(ChefSpec)
+  ChefSpec.define_matcher(:netgear_readyshare_printer_app)
+
+  [:install, :remove].each do |a|
+    define_method("#{a}_netgear_readyshare_printer_app") do |name|
+      ChefSpec::Matchers::ResourceMatcher.new(:netgear_readyshare_printer_app,
+                                              a,
+                                              name)
+    end
+  end
 end

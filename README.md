@@ -10,65 +10,65 @@ Netgear Readyshare Cookbook
 [codeclimate]: https://codeclimate.com/github/RoboticCheese/netgear-readyshare-chef
 [coveralls]: https://coveralls.io/r/RoboticCheese/netgear-readyshare-chef
 
-TODO: Enter the cookbook description here.
+A Chef cookbook for installing Netgear's ReadySHARE tools for certain
+USB-equipped Netgear routers.
 
 Requirements
 ============
 
-TODO: Describe cookbook dependencies.
+Just an OS X or Windows PC and a supported Netgear router.
 
 Usage
 =====
 
-TODO: Describe how to use the cookbook.
+Either add the default recipe to your run_list or use the provided resources in
+a recipe in your own.
 
 Recipes
 =======
 
 ***default***
 
-TODO: Describe each component recipe.
-
-Attributes
-==========
-
-***default***
-
-TODO: Describe any noteworthy attributes.
+Installs Netgear ReadySHARE for USB printers (aka "Netgear USB Control Center"
+on OS X).
 
 Resources
 =========
 
-***netgear_readyshare***
+***netgear_readyshare_printer_app***
 
-TODO: Describe each included resource.
+Install the Netgear ReadySHARE for USB printers app (aka "Netgear USB Control
+Center" on OS X).
 
 Syntax:
 
-    netgear_readyshare 'my_resource' do
-        attribute1 'value1'
-        action :create
+    netgear_readyshare_printer_app 'default' do
+        action :install
     end
 
 Actions:
 
-| Action  | Description  |
-|---------|--------------|
-| action1 | Do something |
+| Action     | Description     |
+|------------|-----------------|
+| `:install` | Install the app |
+| `:remove`  | Remove the app  |
 
 Attributes:
 
 | Attribute  | Default        | Description          |
 |------------|----------------|----------------------|
-| attribute1 | `'some_value'` | Do something         |
-| action     | `:create`      | Action(s) to perform |
+| action     | `:install`     | Action(s) to perform |
 
 Providers
 =========
 
-TODO: Describe each included provider
+***Chef::Provider::NetgearReadysharePrinterApp::MacOsX***
 
-***Chef::Provider::SomeProvider***
+A ReadySHARE printer app provider for OS X platforms.
+
+***Chef::Provider::NetgearReadysharePrinterApp***
+
+A parent provider for platform-specific printer app providers to subclass.
 
 Contributing
 ============

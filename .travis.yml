@@ -1,4 +1,4 @@
-language: ruby
+language: objwctive-c
 
 install:
   - curl -L https://www.chef.io/chef/install.sh | sudo bash -s -- -P chefdk
@@ -10,9 +10,10 @@ before_script:
   - echo -e $DIGITALOCEAN_SSH_KEY_BODY > ~/.ssh/id_rsa
 
 script:
-  - chef exec rake
+  - chef exec rake && chef exec kitchen test -c 5
 
 after_script:
+  - chef exec kitchen destroy
 
 env:
   global:

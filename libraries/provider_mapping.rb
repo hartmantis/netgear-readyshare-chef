@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 #
 # Cookbook Name:: netgear-readyshare
-# Recipe:: default
+# Library:: provider_mapping
 #
 # Copyright 2015 Jonathan Hartman
 #
@@ -18,6 +18,12 @@
 # limitations under the License.
 #
 
-netgear_readyshare_printer_app 'default' do
-  action :install
-end
+require 'chef/dsl'
+require 'chef/platform/provider_mapping'
+require_relative 'provider_netgear_readyshare_printer_app'
+
+Chef::Platform.set(
+  platform: :mac_os_x,
+  resource: :netgear_readyshare_printer_app,
+  provider: Chef::Provider::NetgearReadysharePrinterApp::MacOsX
+)
