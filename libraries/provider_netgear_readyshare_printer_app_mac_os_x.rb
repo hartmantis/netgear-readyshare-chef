@@ -75,7 +75,7 @@ class Chef
         # .dmg file that was inside the .zip file.
         #
         def extract_dmg
-          s = dmg_path
+          s = "file://#{dmg_path}"
           dmg_package 'NETGEAR USB Control Center Installer' do
             source s
             destination Chef::Config[:file_cache_path]

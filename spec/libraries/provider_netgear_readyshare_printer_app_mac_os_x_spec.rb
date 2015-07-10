@@ -72,7 +72,7 @@ describe Chef::Provider::NetgearReadysharePrinterApp::MacOsX do
       p = provider
       expect(p).to receive(:dmg_package)
         .with('NETGEAR USB Control Center Installer').and_yield
-      expect(p).to receive(:source).with('/tmp/netgear.dmg')
+      expect(p).to receive(:source).with('file:///tmp/netgear.dmg')
       expect(p).to receive(:destination).with(Chef::Config[:file_cache_path])
       expect(p).to receive(:action).with(:install)
       expect(p).to receive(:only_if).and_yield
