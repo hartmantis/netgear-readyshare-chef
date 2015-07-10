@@ -19,7 +19,7 @@ describe Chef::Resource::NetgearReadysharePrinterApp do
     end
 
     it 'sets the correct default action' do
-      expect(resource.instance_variable_get(:@action)).to eq(:install)
+      expect(resource.instance_variable_get(:@action)).to eq([:install])
     end
 
     it 'sets the installed status to nil' do
