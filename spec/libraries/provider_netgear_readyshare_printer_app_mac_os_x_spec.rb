@@ -6,10 +6,11 @@ require_relative '../../libraries/provider_netgear_readyshare_printer_' \
 
 describe Chef::Provider::NetgearReadysharePrinterApp::MacOsX do
   let(:name) { 'default' }
+  let(:run_context) { ChefSpec::SoloRunner.new.converge.run_context }
   let(:new_resource) do
-    Chef::Resource::NetgearReadysharePrinterApp.new(name, nil)
+    Chef::Resource::NetgearReadysharePrinterApp.new(name, run_context)
   end
-  let(:provider) { described_class.new(new_resource, nil) }
+  let(:provider) { described_class.new(new_resource, run_context) }
 
   describe 'PATH' do
     it 'returns the app directory' do
@@ -65,10 +66,11 @@ describe Chef::Provider::NetgearReadysharePrinterApp::MacOsX do
     it 'uses an execute resource to run the installer' do
       p = provider
       expect(p).to receive(:execute).with('Run Netgear installer').and_yield
-      cmd = "#{Chef::Config[:file_cache_path]}/" \
-            'NETGEAR\ USB\ Control\ Center\ Installer.app/Contents/MacOS/' \
-            'NETGEAR\ USB\ Control\ Center\ Installer'
-      expect(p).to receive(:command).with(cmd)
+      expect(p).to receive(:command).with(
+        "#{Chef::Config[:file_cache_path]}/" \
+          'NETGEAR\ USB\ Control\ Center\ Installer.app/Contents/MacOS/' \
+          'NETGEAR\ USB\ Control\ Center\ Installer'
+      )
       expect(p).to receive(:action).with(:run)
       expect(p).to receive(:only_if).and_yield
       expect(File).to receive(:exist?).with(described_class::PATH)
@@ -134,16 +136,18 @@ describe Chef::Provider::NetgearReadysharePrinterApp::MacOsX do
 
   describe '#dmg_path' do
     it 'returns a path in the Chef cache dir' do
-      expected = "#{Chef::Config[:file_cache_path]}/netgear.dmg"
-      expect(provider.send(:dmg_path)).to eq(expected)
+      expect(provider.send(:dmg_path)).to eq(
+        "#{Chef::Config[:file_cache_path]}/netgear.dmg"
+      )
     end
   end
 
   describe '#download_path' do
     it 'returns a path in the Chef cache dir' do
-      expected = "#{Chef::Config[:file_cache_path]}/" \
-                 'NETGEAR_USB_Control_Center_Installer_V2.22.zip'
-      expect(provider.send(:download_path)).to eq(expected)
+      expect(provider.send(:download_path)).to eq(
+        "#{Chef::Config[:file_cache_path]}/" \
+          'NETGEAR_USB_Control_Center_Installer_V2.22.zip'
+      )
     end
   end
 end

@@ -5,10 +5,11 @@ require_relative '../../libraries/provider_netgear_readyshare_printer_app'
 
 describe Chef::Provider::NetgearReadysharePrinterApp do
   let(:name) { 'default' }
+  let(:run_context) { ChefSpec::SoloRunner.new.converge.run_context }
   let(:new_resource) do
-    Chef::Resource::NetgearReadysharePrinterApp.new(name, nil)
+    Chef::Resource::NetgearReadysharePrinterApp.new(name, run_context)
   end
-  let(:provider) { described_class.new(new_resource, nil) }
+  let(:provider) { described_class.new(new_resource, run_context) }
 
   describe '#whyrun_supported?' do
     it 'returns true' do
