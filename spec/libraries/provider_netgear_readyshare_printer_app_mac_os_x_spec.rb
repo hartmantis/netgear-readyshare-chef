@@ -26,6 +26,20 @@ describe Chef::Provider::NetgearReadysharePrinterApp::MacOsX do
     end
   end
 
+  describe '.provides?' do
+    let(:platform) { nil }
+    let(:node) { ChefSpec::Macros.stub_node('node.example', platform) }
+    let(:res) { described_class.provides?(node, new_resource) }
+
+    context 'Mac OS X' do
+      let(:platform) { { platform: 'mac_os_x', version: '10.10' } }
+
+      it 'returns true' do
+        expect(res).to eq(true)
+      end
+    end
+  end
+
   describe '#install!' do
     it 'downloads and installs the package' do
       p = provider

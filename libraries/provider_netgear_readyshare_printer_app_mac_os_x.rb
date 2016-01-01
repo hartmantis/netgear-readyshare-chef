@@ -33,6 +33,8 @@ class Chef
         URL ||= 'http://www.downloads.netgear.com/files/GDC/R6300/' \
                 'NETGEAR_USB_Control_Center_Installer_V2.22.zip'
 
+        provides :netgear_readyshare_printer_app, platform_family: 'mac_os_x'
+
         private
 
         #
