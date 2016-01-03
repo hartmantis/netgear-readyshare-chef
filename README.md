@@ -16,7 +16,8 @@ USB-equipped Netgear routers.
 Requirements
 ============
 
-Just an OS X or Windows PC and a supported Netgear router.
+Just an OS X or Windows PC and a supported Netgear router and Chef 12.5 or
+newer.
 
 Usage
 =====
@@ -58,17 +59,6 @@ Attributes:
 | Attribute  | Default        | Description          |
 |------------|----------------|----------------------|
 | action     | `:install`     | Action(s) to perform |
-
-Providers
-=========
-
-***Chef::Provider::NetgearReadysharePrinterApp::MacOsX***
-
-A ReadySHARE printer app provider for OS X platforms.
-
-***Chef::Provider::NetgearReadysharePrinterApp***
-
-A parent provider for platform-specific printer app providers to subclass.
 
 Contributing
 ============

@@ -18,25 +18,22 @@
 # limitations under the License.
 #
 
-require 'chef/resource/lwrp_base'
+require 'chef/resource'
 
 class Chef
   class Resource
     # A Chef resource for the Netgear ReadySHARE app for printers.
     #
     # @author Jonathan Hartman <j@p4nt5.com>
-    class NetgearReadysharePrinterApp < Resource::LWRPBase
-      self.resource_name = :netgear_readyshare_printer_app
-      actions :install, :remove
+    class NetgearReadysharePrinterApp < Resource
       default_action :install
 
-      #
-      # Attribute for the app's installed status.
-      #
-      attribute :installed,
-                kind_of: [NilClass, TrueClass, FalseClass],
-                default: nil
-      alias_method :installed?, :installed
+      %i(install remove).each do |a|
+        action a do
+          fail(NotImplementedError,
+               "Action `#{a}` must be implemented for `#{self.class}` resource")
+        end
+      end
     end
   end
 end
